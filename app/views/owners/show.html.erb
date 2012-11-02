@@ -6,3 +6,20 @@
 <td><%= @owner.name %></td>
 </tr>
 </table>
+
+<h3>請求月<h3>
+<% if @owner.months.any? %>
+<% @owner.months.each do |one| %>
+<li>
+<%= one.month %>
+</li>
+<% end %>
+<% else %>
+登録された請求月がありません
+<% end %>
+
+<h3>請求月登録</h3>
+<%= form_for([@owner, @month]) do |form| %>
+請求月<%= form.select :month,[["1月", "1"],["2月", "2"],["3月", "3"],["4月", "4"],["5月", "5"],["6月", "6"],["7月", "7"],["8月", "8"],["9月", "9"],["10月", "10"],["11月", "11"],["12月", "12"]] %>
+<%= form.submit %>
+<% end %>

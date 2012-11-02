@@ -20,6 +20,7 @@ class OwnersController < ApplicationController
   
   def show
     @owner = Owner.find(params[:id])
+    @month = Owner.find(params[:id]).months.build
   end
   
   def edit
