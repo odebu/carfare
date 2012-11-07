@@ -11,12 +11,13 @@
 <% if @owner.months.any? %>
 <table>
 <% @owner.months.each do |one| %>
-<tr>
+<tr id="month_<%= one.id %>">
 <td><%= one.year %>年<%= one.month %>月</td>
-<td><%= link_to 'Show', "/owners/:owners_id/show/:id" %></td>
-<td><%= link_to 'Edit', "edit_owner_path(owner) " %></td>
-<td><%= link_to 'Destroy', [month.owner, month], :confirm => 'Sure?',
-                                                 :method => :delete %>
+<td><%= link_to 'Show', [one.owner, one] %></td>
+<td><%= link_to 'Edit', one.owner %></td>
+<td><%= link_to 'Destroy', [one.owner, one], :confirm => 'Sure?',
+                                             :method => :delete,
+                                             :remote => true %>
 </td>
 </tr>
 <% end %>
@@ -33,3 +34,9 @@
 <% end %>
 
 <%= link_to 'Back', owners_path %>
+
+<script>
+  $('a[data-method="delete"]').live('ajax:success', function(e, data, status, xhr) {
+    $('#month_'+data.one.id).fadeOut("slow");
+  });
+</script>

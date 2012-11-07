@@ -2,10 +2,7 @@ class MonthsController < ApplicationController
 
   def create
     @owner = Owner.find(params[:owner_id])
-    @month = Owner.find(params[:owner_id]).months.new
-    @month.year = params[:month]['year']
-    @month.month = params[:month]['month']
-    @month.save
+    @month = Owner.find(params[:owner_id]).months.create(params[:month])
     redirect_to owner_path(@owner)
   end
   
@@ -31,7 +28,7 @@ class MonthsController < ApplicationController
   def destroy
     @month = Month.find(params[:id])
     @month.destroy
-    redirect_to action: "show"
+    render json: { one: @month }
   end
   
 

@@ -4,11 +4,13 @@
 <table>
 <tr><td>名前</td></tr>
 <% @owner.each do |owner| %>
-  <tr>
+  <tr id="owner_<%= owner.id %>">
     <td><%= owner.name %></td>
     <td><%= link_to 'Show', owner %></td>
     <td><%= link_to 'Edit', edit_owner_path(owner) %></td>
-    <td><%= link_to 'Destroy', owner, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'Destroy', owner, :method => :delete,
+                                      :confirm => 'Sure?',
+                                      :remote => true %></td>
   </tr>
 <% end %>
 </table>
@@ -19,3 +21,9 @@ Ownerが1件も登録されていません
 <br />
 
 <%= link_to 'New Owner', new_owner_path %>
+
+<script>
+  $('a[data-method="delete"]').live('ajax:success', function(e, data, status, xhr) {
+    $('#owner_'+data.owner.id).fadeOut("slow");
+  });
+</script>

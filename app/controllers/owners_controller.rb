@@ -40,7 +40,7 @@ class OwnersController < ApplicationController
   def destroy
     @owner = Owner.find(params[:id])
     @owner.destroy
-    redirect_to action: "index"
+    render json: { owner: @owner }
   end
 
 end
