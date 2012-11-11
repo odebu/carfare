@@ -9,9 +9,11 @@ class MonthsController < ApplicationController
   def show
     @owner = Owner.find(params[:owner_id])
     @month = Month.find(params[:id])
+    @fare = Month.find(params[:id]).fares.build
   end
   
   def edit
+    @owner = Owner.find(params[:owner_id])
     @month = Month.find(params[:id])
   end
   

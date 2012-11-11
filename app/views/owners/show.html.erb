@@ -14,7 +14,7 @@
 <tr id="month_<%= one.id %>">
 <td><%= one.year %>年<%= one.month %>月</td>
 <td><%= link_to 'Show', [one.owner, one] %></td>
-<td><%= link_to 'Edit', one.owner %></td>
+<td><%= link_to 'Edit', edit_owner_month_path(@owner.id, one) %></td>
 <td><%= link_to 'Destroy', [one.owner, one], :confirm => 'Sure?',
                                              :method => :delete,
                                              :remote => true %>
@@ -26,7 +26,7 @@
 登録された請求月がありません
 <% end %>
 
-<h3>請求月登録</h3>
+<h3>請求月作成</h3>
 <%= form_for([@owner, @month]) do |form| %>
 請求月<%= form.select :year,[["2012年", "2012"],["2013年", "2013"],["2014年", "2014"],["2015年", "2015"],["2016年", "2016"],["2017年", "2017"],["2018年", "2018"],["2019年", "2019"],["2020年", "2020"]] %>
 <%= form.select :month,[["1月", "1"],["2月", "2"],["3月", "3"],["4月", "4"],["5月", "5"],["6月", "6"],["7月", "7"],["8月", "8"],["9月", "9"],["10月", "10"],["11月", "11"],["12月", "12"]] %>

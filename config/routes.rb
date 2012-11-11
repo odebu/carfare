@@ -1,7 +1,9 @@
 Carfare::Application.routes.draw do
-  get "main/index"
+
   resources :owners do
-    resources :months
+    resources :months do
+      resources :fares
+    end
   end
 
   # The priority is based upon order of creation:

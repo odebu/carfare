@@ -11,7 +11,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121031091141) do
+ActiveRecord::Schema.define(:version => 20121111154651) do
+
+  create_table "fares", :force => true do |t|
+    t.string   "visiting_company"
+    t.string   "start_station"
+    t.string   "vehicle"
+    t.integer  "fare"
+    t.integer  "recipt"
+    t.integer  "month_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.string   "arrival_station"
+    t.integer  "day"
+  end
+
+  add_index "fares", ["month_id"], :name => "index_fares_on_month_id"
 
   create_table "months", :force => true do |t|
     t.integer  "year"
