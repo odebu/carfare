@@ -7,6 +7,8 @@ Carfare::Application.routes.draw do
   end
 
   match "/recognitions" => "recognitions#index"
+  match "/recognitions/show" => "recognitions#show"
+  get '/recognitions/:id' => "recognitions#expenses_check"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
