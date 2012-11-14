@@ -1,0 +1,37 @@
+<h3>確認及び承認画面</h3>
+<%= @month.year %>年<%= @month.month %>月<br>
+<% if @fare_show.any? %>
+<table>
+<% @fare_show.each do |one| %>
+<tr>
+<td><%= one.day %>日</td>	
+<td>訪問先<%= one.visiting_company %></td>
+<td>出発駅<%= one.start_station %></td>
+<td>到着駅<%= one.arrival_station %></td>
+<td><%= one.fare %>円</td>
+<td>領収書：<% if one.recipt == 1 %>
+	         有
+	       <% else %>
+             無
+　　　　　　 <% end %>
+</td>
+<td>交通手段：<% if one.recipt == 0 %>
+	          電車・地下鉄
+　　　　　　  <% elsif one.recipt == 1 %>
+              タクシー
+            <% elsif one.recipt == 2 %>
+              新幹線
+            <% elsif one.recipt == 3 %>
+              バス
+            <% elsif one.recipt == 4 %>
+              飛行機
+            <% elsif one.recipt == 5 %>
+              その他
+　　　　　　  <% end %>
+</td>
+</tr>
+<% end %>
+</table>
+<% else %>
+登録された交通費がありません
+<% end %>

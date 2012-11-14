@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  day: 2012-11-10
+  visiting_company: MyString
+  start_station: MyString
+  arrival: MyString
+  station: MyString
+  vehicle: MyString
+  fare: 1
+  recipt: 1
+  month: 
+
+two:
+  day: 2012-11-10
+  visiting_company: MyString
+  start_station: MyString
+  arrival: MyString
+  station: MyString
+  vehicle: MyString
+  fare: 1
+  recipt: 1
+  month: 

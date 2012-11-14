@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121111154651) do
+ActiveRecord::Schema.define(:version => 20121113054859) do
 
   create_table "fares", :force => true do |t|
     t.string   "visiting_company"
@@ -32,8 +32,10 @@ ActiveRecord::Schema.define(:version => 20121111154651) do
     t.integer  "year"
     t.integer  "month"
     t.integer  "owner_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+    t.integer  "recognition_request"
+    t.integer  "recognition_state"
   end
 
   add_index "months", ["owner_id"], :name => "index_months_on_owner_id"

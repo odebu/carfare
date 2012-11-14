@@ -1,0 +1,34 @@
+<h1>承認一覧</h1>
+<% for recognition in @recognition %>
+<tr>
+<td><%= recognition.year %>年</td>
+<td><%= recognition.month %>月</td>
+<td>申請者ID：<%= recognition.owner_id %></td>
+<td><% owner_name = Owner.find(1) %>
+    <% if owner_name == nil %>
+    ユーザが存在しません
+    <% else %>
+    <%= owner_name.name %>
+    <% end %></td>
+<td><%= link_to "確認/承認ページへ", {:action => 'expenses_check', :id => recognition.id} %></td>
+<br>
+</tr>
+<% end %>
+
+<br>
+
+<h3>申請者IDリスト</h3>
+<% for owner_name in @owner_info %>
+<tr>
+<td><%= owner_name.id %></td>
+<td><%= owner_name.name %></td><br>
+</tr>
+<% end %>
+
+
+<br>
+<% name = Owner.find(1) %>
+<%= name.name %>
+<% owner_name = @owner_info.assoc("1") %>
+<%= owner_name %><br>
+<%= @owner_info %><br>
