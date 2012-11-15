@@ -32,6 +32,16 @@ class MonthsController < ApplicationController
     @month.destroy
     render json: { one: @month }
   end
-  
+
+  def application
+    @month = Month.find(params[:id])
+    @month.assign_attributes(params[:month])
+    if @month.save
+      redirect_to action: "show"
+    else
+      redirect_to action: "edit"
+    end
+  end
+
 
 end

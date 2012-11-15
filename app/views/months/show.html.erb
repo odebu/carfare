@@ -63,6 +63,7 @@
 登録された請求月がありません
 <% end %>
 
+<%= button_to "申請", :action => "application", :owner_id => @owner.id, :id => @month.id, :recognition_request => 1 %>
 <%= link_to 'Back', "../" %>
 
 <script>

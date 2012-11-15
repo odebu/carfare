@@ -18,17 +18,17 @@
 <br>
 
 <h3>申請者IDリスト</h3>
-<% for owner_name in @owner_info %>
+<% for owner_name2 in @owner_info %>
 <tr>
-<td><%= owner_name.id %></td>
-<td><%= owner_name.name %></td><br>
+<td><%= owner_name2.id %></td>
+<td><%= owner_name2.name %></td><br>
 </tr>
 <% end %>
 
 
 <br>
 <% name = Owner.find(1) %>
-<%= name.name %>
-<% owner_name = @owner_info.assoc("1") %>
+<%= name.name %><br>
 <%= owner_name %><br>
+<%= owner_name.name %><br>
 <%= @owner_info %><br>
