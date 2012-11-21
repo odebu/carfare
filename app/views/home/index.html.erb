@@ -1,6 +1,4 @@
-<h1>TOP</h1>
-<% if user_signed_in? %>
-<%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-<% else %>
-<%= link_to "ログイン", new_user_session_path %>
-<% end %>
+<h1>Nchak へようこそ</h1>
+<p><%= link_to 'ログイン', [ :new, :user_session ]  %></p>
+<p><%= link_to 'ユーザー登録', [ :new, :user_registration ]  %></p>
+<p><%= link_to 'パスワード再発行', [ :new, :user_password ]  %></p>

@@ -1,6 +1,6 @@
 #eocoding: utf-8
 class OwnersController < ApplicationController
-
+  before_filter :authenticate_user!  
   def index
     @owner = Owner.all
   end
