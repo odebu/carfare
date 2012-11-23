@@ -1,0 +1,10 @@
+<%= form_for([@month, @fare]) do |form| %>
+訪問日<%= form.text_field :day %>
+訪問先<%= form.text_field :visiting_company %>
+出発駅<%= form.text_field :start_station %>
+到着駅<%= form.text_field :arrival_station %>
+運賃<%= form.text_field :fare %>
+領収書<%= form.select :recipt,[["有", "1"],["無", "0"]] %>
+交通手段<%= form.select :vehicle,[["電車・地下鉄", "0"],["タクシー", "1"],["新幹線", "2"],["バス", "3"],["飛行機", "4"],["その他", "5"]] %>
+<%= form.submit %>
+<% end %>

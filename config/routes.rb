@@ -3,15 +3,15 @@ Carfare::Application.routes.draw do
   root :to => "home#index"
 
   devise_for :users
-  get 'owners', :to => 'owners#index', :as => :user_root  
+  get 'months', :to => 'months#index', :as => :user_root  
 
-  resources :owners do
-    resources :months do
-      resources :fares
-    end
+  
+  resources :months do
+    put :application, :on => :member
+    put :withdrawn, :on => :member
+    resources :fares
   end
 
-  put "owners/:owner_id/months/:id" => "months#application"
   match "/recognitions" => "recognitions#index"
   match "/recognitions/show" => "recognitions#show"
   get '/recognitions/:id' => "recognitions#expenses_check"

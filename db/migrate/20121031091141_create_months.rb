@@ -3,10 +3,10 @@ class CreateMonths < ActiveRecord::Migration
     create_table :months do |t|
       t.integer :year
       t.integer :month
-      t.references :owner
+      t.references :user
 
       t.timestamps
     end
-    add_index :months, :owner_id
+    add_index :months, :user_id
   end
 end

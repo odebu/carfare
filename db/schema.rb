@@ -31,14 +31,14 @@ ActiveRecord::Schema.define(:version => 20121119075025) do
   create_table "months", :force => true do |t|
     t.integer  "year"
     t.integer  "month"
-    t.integer  "owner_id"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
-    t.boolean  "recognition_request"
-    t.boolean  "recognition_state"
+    t.integer  "user_id"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+    t.boolean  "recognition_request", :default => false, :null => false
+    t.boolean  "recognition_state",   :default => false, :null => false
   end
 
-  add_index "months", ["owner_id"], :name => "index_months_on_owner_id"
+  add_index "months", ["user_id"], :name => "index_months_on_user_id"
 
   create_table "owners", :force => true do |t|
     t.string   "name"

@@ -11,7 +11,7 @@ class RecognitionsController < ApplicationController
 
   def expenses_check
     @month = Month.find(params[:id])
-    @fare_show = Fare.find(:all, :conditions => { :month_id => params[:id]})
+    @fare_show = Fare.find(:all, :conditions => { :month_id => params[:id]}, :order => "day")
   end
 
 end

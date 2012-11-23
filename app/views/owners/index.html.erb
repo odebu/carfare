@@ -1,4 +1,7 @@
 <h1>申請者一覧</h1>
+
+<%= link_to('Sign out', [ :destroy, :user_session ], :method => :delete, :class => 'signOut') if current_user %>
+
 <%= link_to('Sign out', [ :destroy, :user_session ], :method => :delete, :class => 'signOut') if current_user %>
 <% if @owner.present? %>
 <table>

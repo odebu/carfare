@@ -1,16 +1,23 @@
 <h1>請求月</h1>
 
+<%= link_to('Sign out', [ :destroy, :user_session ], :method => :delete, :class => 'signOut') if current_user %>
+
 <table>
 <tr>
 <td>請求月</td>
 <td><%= @month.year %>年<%= @month.month %>月</td>
-<td><%= link_to 'Edit', edit_owner_month_path(@owner.id, @month.id) %></td>
+<td><% if @month.recognition_request == false %>
+    未申請
+    <% else %>
+    申請済
+    <% end %>
+    </td>
 </tr>
 </table>
 
 
 <h3>交通費作成</h3>
-<%= form_for([@owner, @month, @fare]) do |form| %>
+<%= form_for([@month, @fare]) do |form| %>
 訪問日<%= form.text_field :day %>
 訪問先<%= form.text_field :visiting_company %>
 出発駅<%= form.text_field :start_station %>
@@ -22,9 +29,9 @@
 <% end %>
 
 <h3>記入済交通費</h3>
-<% if @month.fares.any? %>
+<% if @fares.any? %>
 <table>
-<% @month.fares.each do |one| %>
+<% @fares.each do |one| %>
 <tr id="fare_<%= one.id %>">
 <td><%= one.day %>日</td>	
 <td>訪問先<%= one.visiting_company %></td>
@@ -34,27 +41,27 @@
 <td>領収書：<% if one.recipt == 1 %>
 	         有
 	       <% else %>
-             無
-　　　　　　 <% end %>
+           無
+         <% end %>
 </td>
-<td>交通手段：<% if one.recipt == 0 %>
-	          電車・地下鉄
-　　　　　　  <% elsif one.recipt == 1 %>
+<td>交通手段：<% if one.vehicle == "0" %>
+              電車・地下鉄
+　　　　　　  <% elsif one.vehicle == "1" %>
               タクシー
-            <% elsif one.recipt == 2 %>
+            <% elsif one.vehicle == "2" %>
               新幹線
-            <% elsif one.recipt == 3 %>
+            <% elsif one.vehicle == "3" %>
               バス
-            <% elsif one.recipt == 4 %>
+            <% elsif one.vehicle == "4" %>
               飛行機
-            <% elsif one.recipt == 5 %>
+            <% elsif one.vehicle == "5" %>
               その他
 　　　　　　  <% end %>
 </td>
-<td><%= link_to 'Edit', edit_owner_month_fare_path(@owner.id, @month.id, one.id) %></td>
-<td><%= link_to 'Destroy', owner_month_fare_path(@owner.id, @month.id, one.id), :confirm => 'Sure?',
-                                                                                :method => :delete,
-                                                                                :remote => true %>
+<td><%= link_to '編集', edit_month_fare_path(@month.id, one.id) %></td>
+<td><%= link_to '削除', month_fare_path(@month.id, one.id), :confirm => 'Sure?',
+                                                               :method => :delete,
+                                                               :remote => true %>
 </td>
 </tr>
 <% end %>
@@ -63,7 +70,12 @@
 登録された請求月がありません
 <% end %>
 
-<%= button_to "申請", :action => "application", :method => :put %>
+<% if @month.recognition_request == false %>
+  <%= button_to "申請", [ :application, @month ], :method => :put %>
+<% else %>
+  <%= button_to "取り下げる", [ :withdrawn, @month ], :method => :put %>
+<% end %>
+
 <%= link_to 'Back', "../" %>
 
 <script>

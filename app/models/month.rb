@@ -1,5 +1,6 @@
 class Month < ActiveRecord::Base
-  belongs_to :owner
+  belongs_to :user
+  
   attr_accessible :month, :year, :recognition_request, :recognition_state
   has_many :fares
 
