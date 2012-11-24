@@ -71,9 +71,9 @@
 <% end %>
 
 <% if @month.recognition_request == false %>
-  <%= button_to "申請", [ :application, @month ], :method => :put %>
+  <%= button_to "申請", { :action => "application", :id => @month.id }, :method => :put %>
 <% else %>
-  <%= button_to "取り下げる", [ :withdrawn, @month ], :method => :put %>
+  <%= button_to "申請を取り下げる", { :action => "withdrawn", :id => @month.id }, :method => :put %>
 <% end %>
 
 <%= link_to 'Back', "../" %>

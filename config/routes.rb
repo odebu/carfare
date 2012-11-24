@@ -1,6 +1,10 @@
 Carfare::Application.routes.draw do
-
   root :to => "home#index"
+
+  get "admin_welcome/index"
+
+  devise_for :admins
+  get 'recognitions', :to => 'recognitions#index', :as => :admin_root  
 
   devise_for :users
   get 'months', :to => 'months#index', :as => :user_root  
@@ -12,9 +16,13 @@ Carfare::Application.routes.draw do
     resources :fares
   end
 
-  match "/recognitions" => "recognitions#index"
   match "/recognitions/show" => "recognitions#show"
   get '/recognitions/:id' => "recognitions#expenses_check"
+
+  resources :recognitions, :only => [ :index ] do 
+    put :recognition, :on => :member
+    put :rejection, :on => :member
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

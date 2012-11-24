@@ -5,7 +5,15 @@ class Month < ActiveRecord::Base
   has_many :fares
 
   def self.find_fare_for_recognition
-  	find(:all)
+  	find(:all, :conditions => [ "recognition_request = ? and recognition_state = ?", true, 0])
+  end
+
+  def self.find_authorize_fare
+  	find(:all, :conditions => [ "recognition_request = ? and recognition_state = ?", true, 1])
+  end
+
+  def self.find_rejection_fare
+  	find(:all, :conditions => [ "recognition_request = ? and recognition_state = ?", true, 2])
   end
 
 end

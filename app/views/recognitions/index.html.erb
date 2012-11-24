@@ -1,34 +1,53 @@
 <h1>承認一覧</h1>
+<%= link_to('Sign out', [ :destroy, :admin_session ], :method => :delete, :class => 'signOut') if current_admin %>
+<br>
+
+<h3>承認待ち一覧</h3>
 <% for recognition in @recognition %>
 <tr>
 <td><%= recognition.year %>年</td>
 <td><%= recognition.month %>月</td>
-<td>申請者ID：<%= recognition.owner_id %></td>
-<td><% owner_name = Owner.find(1) %>
-    <% if owner_name == nil %>
+<td><% user_name = User.find(recognition.user_id) %>
+    <% if user_name == nil %>
     ユーザが存在しません
     <% else %>
-    <%= owner_name.name %>
+    <%= user_name.email %>
     <% end %></td>
 <td><%= link_to "確認/承認ページへ", {:action => 'expenses_check', :id => recognition.id} %></td>
 <br>
 </tr>
 <% end %>
 
-<br>
-
-<h3>申請者IDリスト</h3>
-<% for owner_name2 in @owner_info %>
+<h3>承認済み一覧</h3>
+<% for authorize in @authorize %>
 <tr>
-<td><%= owner_name2.id %></td>
-<td><%= owner_name2.name %></td><br>
+<td><%= authorize.year %>年</td>
+<td><%= authorize.month %>月</td>
+<td><% user_name = User.find(authorize.user_id) %>
+    <% if user_name == nil %>
+    ユーザが存在しません
+    <% else %>
+    <%= user_name.email %>
+    <% end %></td>
+<td><%= link_to "差し戻し", {:action => 'expenses_check', :id => authorize.id} %></td>
+<br>
 </tr>
 <% end %>
 
+<h3>差し戻し一覧</h3>
+<% for rejection in @rejection %>
+<tr>
+<td><%= rejection.year %>年</td>
+<td><%= rejection.month %>月</td>
+<td><% user_name = User.find(rejection.user_id) %>
+    <% if user_name == nil %>
+    ユーザが存在しません
+    <% else %>
+    <%= user_name.email %>
+    <% end %></td>
+<td><%= link_to "再編集", {:action => 'expenses_check', :id => rejection.id} %></td>
+<br>
+</tr>
+<% end %>
 
 <br>
-<% name = Owner.find(1) %>
-<%= name.name %><br>
-<%= owner_name %><br>
-<%= owner_name.name %><br>
-<%= @owner_info %><br>

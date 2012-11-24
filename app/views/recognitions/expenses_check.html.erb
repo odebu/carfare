@@ -15,17 +15,17 @@
              無
 　　　　　　 <% end %>
 </td>
-<td>交通手段：<% if one.recipt == 0 %>
+<td>交通手段：<% if one.recipt == "0" %>
 	          電車・地下鉄
-　　　　　　  <% elsif one.recipt == 1 %>
+　　　　　　  <% elsif one.recipt == "1" %>
               タクシー
-            <% elsif one.recipt == 2 %>
+            <% elsif one.recipt == "2" %>
               新幹線
-            <% elsif one.recipt == 3 %>
+            <% elsif one.recipt == "3" %>
               バス
-            <% elsif one.recipt == 4 %>
+            <% elsif one.recipt == "4" %>
               飛行機
-            <% elsif one.recipt == 5 %>
+            <% elsif one.recipt == "5" %>
               その他
 　　　　　　  <% end %>
 </td>
@@ -35,3 +35,11 @@
 <% else %>
 登録された交通費がありません
 <% end %>
+
+<% if @month.recognition_state == 1 %>
+  <%= button_to "差し戻し", { :action => "rejection", :id => @month.id }, :method => :put %>
+<% else %>
+  <%= button_to "承認", { :action => "recognition", :id => @month.id }, :method => :put %>
+<% end %>
+
+<%= link_to 'Back', recognitions_path %>

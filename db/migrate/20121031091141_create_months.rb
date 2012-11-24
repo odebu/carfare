@@ -3,6 +3,8 @@ class CreateMonths < ActiveRecord::Migration
     create_table :months do |t|
       t.integer :year
       t.integer :month
+      t.boolean :recognition_request, :null => false, :default => false
+      t.integer :recognition_state, :default => 0
       t.references :user
 
       t.timestamps

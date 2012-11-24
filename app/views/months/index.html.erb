@@ -1,6 +1,7 @@
 <h1>請求月一覧</h1>
 
 <%= link_to('Sign out', [ :destroy, :user_session ], :method => :delete, :class => 'signOut') if current_user %>
+<%= current_user.email %>
 
 <h3>請求月</h3>
 <% if @months.present? %>
@@ -27,6 +28,19 @@
 登録された請求月がありません
 <% end %>
 
+<h3>差し戻し月</h3>
+<% @rejection.each do |one| %>
+<tr id="month_<%= one.id %>">
+<td><%= one.year %>年</td>
+<td><%= one.month %>月</td>
+<td><%= link_to '交通費入力', [one] %></td>
+<td><%= link_to '請求月編集', edit_month_path(one) %></td>
+<td><%= link_to '削除', [one], :confirm => 'Sure?',
+                              :method => :delete,
+                              :remote => true %>
+</td>
+</tr>
+<% end %>
 
 <h3>請求月作成</h3>
 <%= form_for(@month) do |form| %>

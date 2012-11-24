@@ -1,9 +1,8 @@
 class Owner < ActiveRecord::Base
   attr_accessible :name
-  has_many :months
 
-  def self.find_owner
-  	find(:all)
+  def self.find_user
+  	find(:first, :select => "email")
   end
 
 end

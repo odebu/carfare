@@ -1,10 +1,11 @@
 class MonthsController < ApplicationController
 
-  before_filter :authenticate_user!
+  before_filter :authenticate_user! or :authenticate_admin! 
 
   def index
     @month = Month.new
     @months = current_user.months.all(:order => "year, month")
+    @rejection = current_user.months.find(:all, :conditions => [ "recognition_request = ? and recognition_state = ?", true, 2])
   end
 
   def create
