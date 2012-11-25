@@ -28,7 +28,9 @@
 登録された請求月がありません
 <% end %>
 
-<h3>差し戻し月</h3>
+<h3>差し戻された月</h3>
+<% if @rejection.present? %>
+<table>
 <% @rejection.each do |one| %>
 <tr id="month_<%= one.id %>">
 <td><%= one.year %>年</td>
@@ -40,6 +42,10 @@
                               :remote => true %>
 </td>
 </tr>
+<% end %>
+</table>
+<% else %>
+差し戻された請求月がありません
 <% end %>
 
 <h3>請求月作成</h3>
