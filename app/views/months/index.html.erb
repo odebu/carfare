@@ -1,28 +1,16 @@
-<h1>請求月一覧</h1>
-
-<%= link_to('Sign out', [ :destroy, :user_session ], :method => :delete, :class => 'signOut') if current_user %>
-<%= current_user.email %>
+<%= render(:partial => "header") %>
+Hello! <%= current_user.email %>
+<h2>請求月一覧</h2>
 
 <h3>請求月</h3>
 <% if @months.present? %>
-<table>
-<% @months.each do |one| %>
-<tr id="month_<%= one.id %>">
-<td><%= one.year %>年<%= one.month %>月</td>
-<td><% if one.recognition_request == false %>
-    未申請
-    <% else %>
-    申請済
-    <% end %>
-    </td>
-<td><%= link_to '交通費入力', [one] %></td>
-<td><%= link_to '請求月編集', edit_month_path(one) %></td>
-<td><%= link_to '削除', [one], :confirm => 'Sure?',
-                              :method => :delete,
-                              :remote => true %>
-</td>
+<table class="table table-hover">
+<tr>
+  <td width="80"></td>
+  <td width="60">申請状況</td>
+  <td></td><td></td><td></td>
 </tr>
-<% end %>
+<%= render(:partial => "month_show", :collection => @months) %>
 </table>
 <% else %>
 登録された請求月がありません
@@ -30,17 +18,16 @@
 
 <h3>差し戻された月</h3>
 <% if @rejection.present? %>
-<table>
+<table class="table table-hover">
 <% @rejection.each do |one| %>
 <tr id="month_<%= one.id %>">
-<td><%= one.year %>年</td>
-<td><%= one.month %>月</td>
-<td><%= link_to '交通費入力', [one] %></td>
-<td><%= link_to '請求月編集', edit_month_path(one) %></td>
-<td><%= link_to '削除', [one], :confirm => 'Sure?',
-                              :method => :delete,
-                              :remote => true %>
-</td>
+  <td style="color:#ff0000"><%= one.year %>年<%= one.month %>月</td>
+  <td><%= link_to '交通費入力', [one] %></td>
+  <td><%= link_to '請求月編集', edit_month_path(one) %></td>
+  <td><%= link_to '削除', [one], :confirm => 'Sure?',
+                                :method => :delete,
+                                :remote => true %>
+  </td>
 </tr>
 <% end %>
 </table>
@@ -49,14 +36,21 @@
 <% end %>
 
 <h3>請求月作成</h3>
-<%= form_for(@month) do |form| %>
-請求月<%= form.select :year,[["2012年", "2012"],["2013年", "2013"],["2014年", "2014"],["2015年", "2015"],["2016年", "2016"],["2017年", "2017"],["2018年", "2018"],["2019年", "2019"],["2020年", "2020"]] %>
-<%= form.select :month,[["1月", "1"],["2月", "2"],["3月", "3"],["4月", "4"],["5月", "5"],["6月", "6"],["7月", "7"],["8月", "8"],["9月", "9"],["10月", "10"],["11月", "11"],["12月", "12"]] %>
-<%= form.submit %>
+<%= form_tag('/months') do %>
+請求月<%= select :month, :year, [["2012年", "2012"],["2013年", "2013"],["2014年", "2014"],["2015年", "2015"],["2016年", "2016"],["2017年", "2017"],["2018年", "2018"],["2019年", "2019"],["2020年", "2020"]], {}, :class => "span2" %>
+<%= select :month, :month, [["1月", "1"],["2月", "2"],["3月", "3"],["4月", "4"],["5月", "5"],["6月", "6"],["7月", "7"],["8月", "8"],["9月", "9"],["10月", "10"],["11月", "11"],["12月", "12"]], {}, :class => "span1" %>
+<%= submit_tag(["作成"], :class => "btn") %>
 <% end %>
 
 <script>
   $('a[data-method="delete"]').live('ajax:success', function(e, data, status, xhr) {
     $('#month_'+data.one.id).fadeOut("slow");
   });
+//  document.on("ajax:success", "a[data-update]", function(event, element) {
+//    Element.update($(element.readAttribute('data-update')), event.memo.responseText);
+//  });
+
+//  $('a[data-method="post"]').live('ajax:success', function(e, data, status, xhr) {
+//    $('#month_'+data.one.id).fadeIn("slow");
+//  });  
 </script>

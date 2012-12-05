@@ -1,0 +1,32 @@
+<tr id="fare_<%= fares.id %>">
+<td width="30"><%= fares.day %>日</td>	
+<td><%= fares.visiting_company %></td>
+<td><%= fares.start_station %></td>
+<td><%= fares.arrival_station %></td>
+<td width="60"><%= number_to_currency(fares.fare,:precision =>0, :format=>"%n%u", :unit=>"円") %></td>
+<td width="50"><% if fares.recipt == 1 %>
+	               有
+	       　　　 <% else %>
+                 無
+         　　　 <% end %>
+</td>
+<td><% if fares.vehicle == "0" %>
+      電車・地下鉄
+    <% elsif fares.vehicle == "1" %>
+      タクシー
+    <% elsif fares.vehicle == "2" %>
+      新幹線
+    <% elsif fares.vehicle == "3" %>
+      バス
+    <% elsif fares.vehicle == "4" %>
+      飛行機
+    <% elsif fares.vehicle == "5" %>
+      その他
+　　 <% end %>
+</td>
+<td width="30"><%= link_to '編集', edit_month_fare_path(@month.id, fares.id) %></td>
+<td width="30"><%= link_to '削除', month_fare_path(@month.id, fares.id), :confirm => 'Sure?',
+                                                               :method => :delete,
+                                                               :remote => true %>
+</td>
+</tr>

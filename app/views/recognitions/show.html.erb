@@ -1,6 +1,8 @@
+<%= render(:partial => "admin_header") %>
+Hello! <%= current_admin.email %>
 <h3>記入済交通費一覧</h3>
 <% if @fare_show.any? %>
-<table>
+<table class="table table-hover">
 <% @fare_show.each do |one| %>
 <tr>
 <td><%= one.day %>日</td>	

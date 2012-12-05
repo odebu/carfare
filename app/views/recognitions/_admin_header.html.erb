@@ -1,0 +1,14 @@
+<div class="navbar navbar-fixed-top navbar-inverse">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">
+        SGW交通費精算管理画面
+      </a>
+      <ul class="nav">
+        <li>
+          <%= link_to('Sign out', [ :destroy, :admin_session ], :method => :delete, :class => 'signOut') if current_admin %>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

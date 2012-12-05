@@ -1,10 +1,11 @@
-<h1>請求月</h1>
+<%= render(:partial => "header") %>
+Hello! <%= current_user.email %>
+<h2>請求月</h2>
 
 <%= link_to('Sign out', [ :destroy, :user_session ], :method => :delete, :class => 'signOut') if current_user %>
 
-<table>
+<table class="table" >
 <tr>
-<td>請求月</td>
 <td><%= @month.year %>年<%= @month.month %>月</td>
 <td><% if @month.recognition_request == false %>
     未申請
@@ -18,65 +19,42 @@
 
 <h3>交通費作成</h3>
 <%= form_for([@month, @fare]) do |form| %>
-訪問日<%= form.text_field :day %>
-訪問先<%= form.text_field :visiting_company %>
-出発駅<%= form.text_field :start_station %>
-到着駅<%= form.text_field :arrival_station %>
-運賃<%= form.text_field :fare %>
-領収書<%= form.select :recipt,[["有", "1"],["無", "0"]] %>
-交通手段<%= form.select :vehicle,[["電車・地下鉄", "0"],["タクシー", "1"],["新幹線", "2"],["バス", "3"],["飛行機", "4"],["その他", "5"]] %>
-<%= form.submit %>
+訪問日<%= form.text_field :day, :class => "span1" %>
+訪問先<%= form.text_field :visiting_company, :class => "span2" %>
+出発駅<%= form.text_field :start_station, :class => "span2" %>
+到着駅<%= form.text_field :arrival_station, :class => "span2" %>
+運賃<%= form.text_field :fare, :class => "span1" %>円 
+領収書<%= form.select(:recipt,[["有", "1"],["無", "0"]], {}, { :class => "span1" }) %>
+交通手段<%= form.select(:vehicle,[["電車・地下鉄", "0"],["タクシー", "1"],["新幹線", "2"],["バス", "3"],["飛行機", "4"],["その他", "5"]], {}, { :class => "span2" }) %>
+<%= form.submit(["作成"], :class => "btn") %>
 <% end %>
 
 <h3>記入済交通費</h3>
 <% if @fares.any? %>
-<table>
-<% @fares.each do |one| %>
-<tr id="fare_<%= one.id %>">
-<td><%= one.day %>日</td>	
-<td>訪問先<%= one.visiting_company %></td>
-<td>出発駅<%= one.start_station %></td>
-<td>到着駅<%= one.arrival_station %></td>
-<td><%= one.fare %>円</td>
-<td>領収書：<% if one.recipt == 1 %>
-	         有
-	       <% else %>
-           無
-         <% end %>
-</td>
-<td>交通手段：<% if one.vehicle == "0" %>
-              電車・地下鉄
-　　　　　　  <% elsif one.vehicle == "1" %>
-              タクシー
-            <% elsif one.vehicle == "2" %>
-              新幹線
-            <% elsif one.vehicle == "3" %>
-              バス
-            <% elsif one.vehicle == "4" %>
-              飛行機
-            <% elsif one.vehicle == "5" %>
-              その他
-　　　　　　  <% end %>
-</td>
-<td><%= link_to '編集', edit_month_fare_path(@month.id, one.id) %></td>
-<td><%= link_to '削除', month_fare_path(@month.id, one.id), :confirm => 'Sure?',
-                                                               :method => :delete,
-                                                               :remote => true %>
-</td>
+<table class="table table-hover">
+<tr>
+<td width="30"></td> 
+<td>訪問先</td>
+<td>出発駅</td>
+<td>到着駅</td>
+<td width="50">運賃</td>
+<td>領収書</td>
+<td>交通手段</td>
+<td></td><td></td>
 </tr>
-<% end %>
+<%= render(:partial => "fares", :collection => @fares) %>
 </table>
 <% else %>
 登録された請求月がありません
 <% end %>
 
 <% if @month.recognition_request == false %>
-  <%= button_to "申請", { :action => "application", :id => @month.id }, :method => :put %>
+  <%= button_to "申請", { :action => "application", :id => @month.id }, :method => :put, :class => "btn btn-primary" %>
 <% else %>
-  <%= button_to "申請を取り下げる", { :action => "withdrawn", :id => @month.id }, :method => :put %>
+  <%= button_to "申請を取り下げる", { :action => "withdrawn", :id => @month.id }, :method => :put, :class => "btn btn-danger" %>
 <% end %>
 
-<%= link_to 'Back', "../" %>
+<%= link_to 'Back', months_path %>
 
 <script>
   $('a[data-method="delete"]').live('ajax:success', function(e, data, status, xhr) {
