@@ -1,4 +1,4 @@
-Carfare::Application.routes.draw do
+  Carfare::Application.routes.draw do
   root :to => "home#index"
 
   get "admin_welcome/index"
@@ -9,7 +9,6 @@ Carfare::Application.routes.draw do
   devise_for :users
   get 'months', :to => 'months#index', :as => :user_root  
 
-  
   resources :months do
     put :application, :on => :member
     put :withdrawn, :on => :member

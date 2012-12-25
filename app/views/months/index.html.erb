@@ -4,7 +4,7 @@ Hello! <%= current_user.email %>
 
 <h3>請求月</h3>
 <% if @months.present? %>
-<table class="table table-hover">
+<table class="table table-hover" months>
 <tr>
   <td width="80"></td>
   <td width="60">申請状況</td>
@@ -39,13 +39,17 @@ Hello! <%= current_user.email %>
 <%= form_tag('/months') do %>
 請求月<%= select :month, :year, [["2012年", "2012"],["2013年", "2013"],["2014年", "2014"],["2015年", "2015"],["2016年", "2016"],["2017年", "2017"],["2018年", "2018"],["2019年", "2019"],["2020年", "2020"]], {}, :class => "span2" %>
 <%= select :month, :month, [["1月", "1"],["2月", "2"],["3月", "3"],["4月", "4"],["5月", "5"],["6月", "6"],["7月", "7"],["8月", "8"],["9月", "9"],["10月", "10"],["11月", "11"],["12月", "12"]], {}, :class => "span1" %>
-<%= submit_tag(["作成"], :class => "btn") %>
+<%= submit_tag(["作成"], :class => "btn",
+                        :method => :create) %>
 <% end %>
 
 <script>
   $('a[data-method="delete"]').live('ajax:success', function(e, data, status, xhr) {
     $('#month_'+data.one.id).fadeOut("slow");
   });
+
+
+
 //  document.on("ajax:success", "a[data-update]", function(event, element) {
 //    Element.update($(element.readAttribute('data-update')), event.memo.responseText);
 //  });

@@ -1,5 +1,5 @@
 class FaresController < ApplicationController
-
+  http_basic_authenticate_with :name => "sgw", :password => "hogehoge"
   before_filter :authenticate_user!
 
   def create

@@ -1,4 +1,5 @@
 class RecognitionsController < ApplicationController
+  http_basic_authenticate_with :name => "sgw", :password => "hogehoge"
   before_filter :authenticate_admin!  
 
   def index

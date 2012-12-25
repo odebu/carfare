@@ -3,6 +3,8 @@ class Month < ActiveRecord::Base
   
   attr_accessible :month, :year, :recognition_request, :recognition_state
   has_many :fares
+  validates :month, :presence => true
+  validates :year, :presence => true
 
   def self.find_fare_for_recognition
   	find(:all, :conditions => [ "recognition_request = ? and recognition_state = ?", true, 0])
