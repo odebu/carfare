@@ -1,33 +1,16 @@
 <%= render(:partial => "header") %>
 Hello! <%= current_user.email %>
-<h2>請求月</h2>
+<h2><%= @month.year %>年<%= @month.month %>月</h2>
 
-<%= link_to('Sign out', [ :destroy, :user_session ], :method => :delete, :class => 'signOut') if current_user %>
-
-<table class="table" >
-<tr>
-<td><%= @month.year %>年<%= @month.month %>月</td>
-<td><% if @month.recognition_request == false %>
+申請状況：
+  <% if @month.recognition_request == false %>
     未申請
-    <% else %>
+  <% else %>
     申請済
-    <% end %>
-    </td>
-</tr>
-</table>
-
+  <% end %>
 
 <h3>交通費作成</h3>
-<%= form_for([@month, @fare]) do |form| %>
-訪問日<%= form.text_field :day, :class => "span1" %>
-訪問先<%= form.text_field :visiting_company, :class => "span2" %>
-出発駅<%= form.text_field :start_station, :class => "span2" %>
-到着駅<%= form.text_field :arrival_station, :class => "span2" %>
-運賃<%= form.text_field :fare, :class => "span1" %>円 
-領収書<%= form.select(:recipt,[["有", "1"],["無", "0"]], {}, { :class => "span1" }) %>
-交通手段<%= form.select(:vehicle,[["電車・地下鉄", "0"],["タクシー", "1"],["新幹線", "2"],["バス", "3"],["飛行機", "4"],["その他", "5"]], {}, { :class => "span2" }) %>
-<%= form.submit(["作成"], :class => "btn") %>
-<% end %>
+<%= render 'fare_form' %>
 
 <h3>記入済交通費</h3>
 <% if @fares.any? %>
@@ -35,6 +18,7 @@ Hello! <%= current_user.email %>
 <tr>
 <td width="30"></td> 
 <td>訪問先</td>
+<td>訪問目的</td>
 <td>出発駅</td>
 <td>到着駅</td>
 <td width="50">運賃</td>
@@ -60,4 +44,17 @@ Hello! <%= current_user.email %>
   $('a[data-method="delete"]').live('ajax:success', function(e, data, status, xhr) {
     $('#fare_'+data.one.id).fadeOut("slow");
   });
+</script>
+
+<script type="text/javascript">
+  var validation = $("#new_fare")
+    .exValidation({
+      firstValidate: true,
+      rules: {
+        fare_day: "chkrequired chknumonly chkmin2",
+        fare_fare: "chkrequired chknumonly"
+      },
+      stepValidation: true,
+      errFocus: true
+    });
 </script>

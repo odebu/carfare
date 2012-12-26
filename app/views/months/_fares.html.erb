@@ -1,6 +1,7 @@
 <tr id="fare_<%= fares.id %>">
 <td width="30"><%= fares.day %>日</td>	
 <td><%= fares.visiting_company %></td>
+<td><%= fares.visiting_purpose %></td>
 <td><%= fares.start_station %></td>
 <td><%= fares.arrival_station %></td>
 <td width="60"><%= number_to_currency(fares.fare,:precision =>0, :format=>"%n%u", :unit=>"円") %></td>

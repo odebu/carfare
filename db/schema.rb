@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(:version => 20121123051653) do
   create_table "fares", :force => true do |t|
     t.integer  "day"
     t.string   "visiting_company"
+    t.string   "visiting_purpose"
     t.string   "start_station"
     t.string   "arrival_station"
     t.string   "vehicle"

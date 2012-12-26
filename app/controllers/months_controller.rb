@@ -12,8 +12,8 @@ class MonthsController < ApplicationController
     @month = Month.new(params[:month]) 
     @month.user = current_user  
     @month.save
-#   redirect_to user_root_path
-    render json: { one: @month }
+    redirect_to user_root_path
+  # render json: { one: @month }
   end
   
   def show
