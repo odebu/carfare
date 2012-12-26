@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 class MonthsController < ApplicationController
   http_basic_authenticate_with :name => "sgw", :password => "hogehoge"
   before_filter :authenticate_user! or :authenticate_admin! 
