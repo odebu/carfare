@@ -5,7 +5,7 @@ class Fare < ActiveRecord::Base
   validates :day, :presence => true,
                   :numericality => {:only_integer => true, :less_than => 32}
   validates :fare, :presence => true,
-                  :numericality => {:only_integer => true}
+                   :numericality => {:only_integer => true}
   validates :visiting_company, :presence => true
   validates :visiting_purpose, :presence => true
 
