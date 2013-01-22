@@ -1,0 +1,2 @@
+module AccountingWelcomeHelper
+end

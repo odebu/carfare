@@ -15,7 +15,7 @@ class Month < ActiveRecord::Base
   end
 
   def self.find_rejection_fare
-  	find(:all, :conditions => [ "recognition_request = ? and recognition_state = ?", true, 2])
+  	find(:all, :conditions => [ "recognition_state = ?", 2])
   end
 
 end

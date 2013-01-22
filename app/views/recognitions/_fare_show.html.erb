@@ -3,7 +3,7 @@
   <td><%= fare_show.visiting_company %></td>
   <td><%= fare_show.start_station %></td>
   <td><%= fare_show.arrival_station %></td>
-  <td width="60"><%= number_to_currency(fare_show.fare,:precision =>0, :format=>"%n%u", :unit=>"円") %></td>
+  <td width="60"><%= number_to_currency(fare_show.fare, :precision =>0, :format=>"%n%u", :unit=>"円") %></td>
   <td><% if fare_show.recipt == 1 %>
         有
       <% else %>

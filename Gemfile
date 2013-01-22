@@ -1,7 +1,8 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.7'
+gem 'rails', '3.2.11'
 
+# Authentication
 gem 'devise', '2.1.2'
 
 # Bundle edge Rails instead:

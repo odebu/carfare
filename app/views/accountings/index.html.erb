@@ -1,0 +1,85 @@
+<%= render(:partial => "accounting_header") %>
+Hello! <%= current_accounting.email %>
+<h2>承認一覧</h2>
+<%= link_to('Sign out', [ :destroy, :accounting_session ], :method => :delete, :class => 'signOut') if current_admin %>
+<br>
+
+<h3>承認待ち一覧</h3>
+<% if @recognition.present? %>
+<table class="table table-hover">
+<tr>
+  <td width="80"></td>
+  <td width="150">メールアドレス</td>
+  <td></td>
+</tr>
+<% for recognition in @recognition %>
+<tr>
+<td width="80" style="color:#ff0000"><%= recognition.year %>年<%= recognition.month %>月</td>
+<td width="150" style="color:#ff0000"><% user_name = User.find(recognition.user_id) %>
+    <% if user_name == nil %>
+    ユーザが存在しません
+    <% else %>
+    <%= user_name.email %>
+    <% end %></td>
+<td><%= link_to "確認/承認ページへ", {:action => 'expenses_check', :id => recognition.id} %></td>
+<br>
+</tr>
+<% end %>
+</table>
+<% else %>
+承認待ちの請求月はありません
+<% end %>
+
+<h3>承認済み一覧</h3>
+<% if @authorize.present? %>
+<table class="table table-hover">
+<tr>
+  <td width="80"></td>
+  <td width="150">メールアドレス</td>
+  <td></td>
+</tr>
+<% for authorize in @authorize %>
+<tr>
+<td width="80"><%= authorize.year %>年<%= authorize.month %>月</td>
+<td width="150"><% user_name = User.find(authorize.user_id) %>
+    <% if user_name == nil %>
+    ユーザが存在しません
+    <% else %>
+    <%= user_name.email %>
+    <% end %></td>
+<td><%= link_to "差し戻し", {:action => 'expenses_check', :id => authorize.id} %></td>
+<br>
+</tr>
+<% end %>
+</table>
+<% else %>
+承認済みの請求月はありません
+<% end %>
+
+<h3>差し戻し一覧</h3>
+<% if @rejection.present? %>
+<table class="table table-hover">
+<tr>
+  <td width="80"></td>
+  <td width="150">メールアドレス</td>
+  <td></td>
+</tr>
+<% for rejection in @rejection %>
+<tr>
+<td width="80"><%= rejection.year %>年<%= rejection.month %>月</td>
+<td width="150"><% user_name = User.find(rejection.user_id) %>
+    <% if user_name == nil %>
+    ユーザが存在しません
+    <% else %>
+    <%= user_name.email %>
+    <% end %></td>
+<td><%= link_to "再編集", {:action => 'expenses_check', :id => rejection.id} %></td>
+<br>
+</tr>
+<% end %>
+</table>
+<% else %>
+差し戻した請求月はありません
+<% end %>
+
+<br>

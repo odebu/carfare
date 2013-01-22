@@ -28,7 +28,7 @@ class RecognitionsController < ApplicationController
 
   def rejection
     @month = Month.find(params[:id])
-    @month.update_attribute(:recognition_state, 2)  
+    @month.update_attributes(:recognition_state => 2, :recognition_request => false)  
     redirect_to :back
   end
 

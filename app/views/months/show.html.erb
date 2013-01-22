@@ -47,11 +47,15 @@ Hello! <%= current_user.email %>
 </script>
 
 <script type="text/javascript">
-  var validation = $("#new_fare")
+  var validation = $(".new_fare")
     .exValidation({
       firstValidate: true,
       rules: {
         fare_day: "chkrequired chknumonly chkmin2",
+        fare_visiting_company: "chkrequired",
+        fare_visiting_purpose: "chkrequired",
+        fare_start_station: "chkrequired",
+        fare_arrival_station: "chkrequired",
         fare_fare: "chkrequired chknumonly"
       },
       stepValidation: true,

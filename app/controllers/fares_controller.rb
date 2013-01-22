@@ -25,7 +25,7 @@ class FaresController < ApplicationController
     if @fare.save
       redirect_to month_path(@fare.month_id)
     else
-      redirect_to action: "edit"
+      redirect_to month_path
     end
   end
 

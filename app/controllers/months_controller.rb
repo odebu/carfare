@@ -1,12 +1,12 @@
 # -*- encoding: utf-8 -*-
 class MonthsController < ApplicationController
   http_basic_authenticate_with :name => "sgw", :password => "hogehoge"
-  before_filter :authenticate_user! or :authenticate_admin! 
+  before_filter :authenticate_user! or :authenticate_admin! or :authenticate_accounting!
 
   def index
     @month = Month.new
     @months = current_user.months.all(:order => "year, month")
-    @rejection = current_user.months.find(:all, :conditions => [ "recognition_request = ? and recognition_state = ?", true, 2])
+    @rejection = current_user.months.find(:all, :conditions => [ "recognition_state = ?", 2])
   end
 
   def create
@@ -45,7 +45,7 @@ class MonthsController < ApplicationController
 
   def application
     @month = Month.find(params[:id])
-    @month.update_attribute(:recognition_request, true)  
+    @month.update_attributes(:recognition_request => true, :recognition_state => 0)  
     redirect_to :back
   end
 
