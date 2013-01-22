@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 class AdminWelcomeController < ApplicationController
   def index
     if current_admin  
