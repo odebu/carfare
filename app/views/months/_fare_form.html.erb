@@ -2,8 +2,10 @@
 訪問日<%= form.text_field :day, :class => "span1" %>
 訪問先<%= form.text_field :visiting_company, :class => "span2" %>
 訪問目的<%= form.text_field :visiting_purpose %>
-出発駅<%= form.text_field :start_station, :class => "span2" %>
-到着駅<%= form.text_field :arrival_station, :class => "span2" %>
+出発駅<%= form.text_field :start_station, 
+                         :class => "span2" %>
+到着駅<%= form.text_field :arrival_station, 
+                         :class => "span2" %>
 運賃<%= form.text_field :fare, :class => "span1" %>円 
 領収書<%= form.select(:recipt,[["無", "0"],["有", "1"]], {}, { :class => "span1" }) %>
 交通手段<%= form.select(:vehicle,[["電車・地下鉄", "0"],["タクシー", "1"],["新幹線", "2"],["バス", "3"],["飛行機", "4"],["その他", "5"]], {}, { :class => "span2" }) %>

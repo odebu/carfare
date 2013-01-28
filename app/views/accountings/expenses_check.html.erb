@@ -1,0 +1,26 @@
+<%= render(:partial => "accounting_header") %>
+Hello! <%= current_accounting.email %>
+<h3>確認及び承認画面</h3>
+申請者：<%= @user.email %><br>
+<%= @month.year %>年<%= @month.month %>月<br>
+<% if @fare_show.any? %>
+<table class="table table-hover">
+  <tr>
+    <td width="30"></td>
+    <td>訪問先</td>
+    <td>訪問目的</td>
+    <td>出発駅</td>
+    <td>到着駅</td>
+    <td width="50">運賃</td>
+    <td>領収書</td>
+    <td>交通手段</td>
+    <td></td><td></td>
+  </tr>
+  <%= render(:partial => "fare_show", :collection => @fare_show) %>
+</table>
+<p id="fare_sum">合計：<%= number_to_currency(@fare_sum, :precision =>0, :format=>"%n%u", :unit=>"円") %></p>
+<% else %>
+登録された交通費がありません
+<% end %>
+
+<%= link_to 'Back', accountings_path %>

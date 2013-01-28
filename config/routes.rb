@@ -1,26 +1,30 @@
   Carfare::Application.routes.draw do
  
-  get "accountings/index"
+  # 申請者用トップとログイン周りのルーティング
 
   devise_for :users
   get 'months', :to => 'months#index', :as => :user_root  
 
+  # 承認者用トップとログイン周りのルーティング
   get "admin_welcome/index"
 
-  devise_for :admins
-  get 'recognitions', :to => 'recognitions#index', :as => :admin_root 
+  devise_for :admins, :controllers =>  {:registrations => :registrations}
+  get 'recognitions', :to => 'recognitions#index', :as => :admin_root
 
+  # 経理用トップとログイン周りのルーティング  
   get "accounting_welcome/index"
 
   devise_for :accountings
   get 'accountings', :to => 'accountings#index', :as => :acccounting_root 
-  
+
+  # 申請者用画面のルーティング  
   resources :months do
     put :application, :on => :member
     put :withdrawn, :on => :member
     resources :fares
   end
 
+  # 承認者用画面のルーティング
   match "/recognitions/show" => "recognitions#show"
   get '/recognitions/:id' => "recognitions#expenses_check"
 
@@ -28,6 +32,12 @@
     put :recognition, :on => :member
     put :rejection, :on => :member
   end
+
+  # 経理用画面のルーティング
+  resources :accountings, :only => [ :index ] do 
+  end
+
+  get '/accountings/:id' => "accountings#expenses_check"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -21,6 +21,7 @@ class MonthsController < ApplicationController
     @month = Month.find(params[:id])
     @fare = Month.find(params[:id]).fares.build
     @fares = Fare.all(:conditions => { :month_id => params[:id]}, :order => "day")
+    @fare_sum = Fare.sum(:fare, :conditions => { :month_id => params[:id]})
   end
   
   def edit
@@ -31,7 +32,7 @@ class MonthsController < ApplicationController
     @month = Month.find(params[:id])
     @month.assign_attributes(params[:month])
     if @month.save
-      redirect_to action: "show"
+      redirect_to action: "index"
     else
       redirect_to action: "edit"
     end
@@ -43,12 +44,14 @@ class MonthsController < ApplicationController
     render json: { one: @month }
   end
 
+  # 申請用メソッド
   def application
     @month = Month.find(params[:id])
     @month.update_attributes(:recognition_request => true, :recognition_state => 0)  
     redirect_to :back
   end
 
+  # 取り下げ用メソッド
   def withdrawn
     @month = Month.find(params[:id])
     @month.update_attribute(:recognition_request, false)  

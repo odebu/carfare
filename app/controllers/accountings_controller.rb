@@ -10,4 +10,11 @@ class AccountingsController < ApplicationController
     @rejection = Month.find_rejection_fare
   end
 
+  def expenses_check
+    @month = Month.find(params[:id])
+    @user = User.find(@month.user_id)
+    @fare_show = Fare.find(:all, :conditions => { :month_id => params[:id]}, :order => "day")
+    @fare_sum = Fare.sum(:fare, :conditions => { :month_id => params[:id]})
+  end
+
 end

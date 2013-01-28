@@ -1,4 +1,4 @@
-#eocoding: utf-8
+# -*- encoding: utf-8 -*-
 class OwnersController < ApplicationController 
   def index
     @owner = Owner.all

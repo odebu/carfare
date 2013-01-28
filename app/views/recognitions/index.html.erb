@@ -1,7 +1,6 @@
 <%= render(:partial => "admin_header") %>
 Hello! <%= current_admin.email %>
 <h2>承認一覧</h2>
-<%= link_to('Sign out', [ :destroy, :admin_session ], :method => :delete, :class => 'signOut') if current_admin %>
 <br>
 
 <h3>承認待ち一覧</h3>

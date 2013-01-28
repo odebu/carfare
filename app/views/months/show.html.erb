@@ -11,23 +11,28 @@ Hello! <%= current_user.email %>
 
 <h3>交通費作成</h3>
 <%= render 'fare_form' %>
+<!-- google乗換案内からの要素取得テストとの残骸
+<p id="start_station_test"><p>
+<li id="fare_calculation_list"></li> -->
+<button id="fare_calculation_button" class="btn btn-info">入力した駅でGoogle乗換案内</button>
 
 <h3>記入済交通費</h3>
 <% if @fares.any? %>
 <table class="table table-hover">
-<tr>
-<td width="30"></td> 
-<td>訪問先</td>
-<td>訪問目的</td>
-<td>出発駅</td>
-<td>到着駅</td>
-<td width="50">運賃</td>
-<td>領収書</td>
-<td>交通手段</td>
-<td></td><td></td>
-</tr>
-<%= render(:partial => "fares", :collection => @fares) %>
+  <tr>
+    <td width="30"></td> 
+    <td>訪問先</td>
+    <td>訪問目的</td>
+    <td>出発駅</td>
+    <td>到着駅</td>
+    <td width="50">運賃</td>
+    <td>領収書</td>
+    <td>交通手段</td>
+    <td></td><td></td>
+  </tr>
+  <%= render(:partial => "fares", :collection => @fares) %>
 </table>
+<p id="fare_sum">合計：<%= number_to_currency(@fare_sum, :precision =>0, :format=>"%n%u", :unit=>"円") %></p>
 <% else %>
 登録された請求月がありません
 <% end %>
@@ -44,21 +49,4 @@ Hello! <%= current_user.email %>
   $('a[data-method="delete"]').live('ajax:success', function(e, data, status, xhr) {
     $('#fare_'+data.one.id).fadeOut("slow");
   });
-</script>
-
-<script type="text/javascript">
-  var validation = $(".new_fare")
-    .exValidation({
-      firstValidate: true,
-      rules: {
-        fare_day: "chkrequired chknumonly chkmin2",
-        fare_visiting_company: "chkrequired",
-        fare_visiting_purpose: "chkrequired",
-        fare_start_station: "chkrequired",
-        fare_arrival_station: "chkrequired",
-        fare_fare: "chkrequired chknumonly"
-      },
-      stepValidation: true,
-      errFocus: true
-    });
 </script>

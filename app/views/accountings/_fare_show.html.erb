@@ -1,0 +1,28 @@
+<tr>
+  <td width="30"><%= fare_show.day %>日</td> 
+  <td><%= fare_show.visiting_company %></td>
+  <td><%= fare_show.visiting_purpose %></td>
+  <td><%= fare_show.start_station %></td>
+  <td><%= fare_show.arrival_station %></td>
+  <td class="fare" width="60"><%= number_to_currency(fare_show.fare, :precision =>0, :format=>"%n%u", :unit=>"円") %></td>
+  <td><% if fare_show.recipt == 1 %>
+        有
+      <% else %>
+        無
+      <% end %>
+  </td>
+  <td><% if fare_show.vehicle == "0" %>
+        電車・地下鉄
+      <% elsif fare_show.vehicle == "1" %>
+        タクシー
+      <% elsif fare_show.vehicle == "2" %>
+        新幹線
+      <% elsif fare_show.vehicle == "3" %>
+        バス
+      <% elsif fare_show.vehicle == "4" %>
+        飛行機
+      <% elsif fare_show.vehicle == "5" %>
+        その他
+      <% end %>
+  </td>
+</tr>
