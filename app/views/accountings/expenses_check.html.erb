@@ -1,5 +1,4 @@
 <%= render(:partial => "accounting_header") %>
-Hello! <%= current_accounting.email %>
 <h3>確認及び承認画面</h3>
 申請者：<%= @user.email %><br>
 <%= @month.year %>年<%= @month.month %>月<br>
@@ -11,9 +10,10 @@ Hello! <%= current_accounting.email %>
     <td>訪問目的</td>
     <td>出発駅</td>
     <td>到着駅</td>
+    <td width="50">往復</td>
+    <td>交通手段</td>
     <td width="50">運賃</td>
     <td>領収書</td>
-    <td>交通手段</td>
     <td></td><td></td>
   </tr>
   <%= render(:partial => "fare_show", :collection => @fare_show) %>

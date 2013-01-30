@@ -1,7 +1,6 @@
   Carfare::Application.routes.draw do
  
   # 申請者用トップとログイン周りのルーティング
-
   devise_for :users
   get 'months', :to => 'months#index', :as => :user_root  
 

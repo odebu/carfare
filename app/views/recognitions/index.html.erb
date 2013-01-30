@@ -1,8 +1,5 @@
 <%= render(:partial => "admin_header") %>
 Hello! <%= current_admin.email %>
-<h2>承認一覧</h2>
-<br>
-
 <h3>承認待ち一覧</h3>
 <% if @recognition.present? %>
 <table class="table table-hover">
@@ -21,7 +18,6 @@ Hello! <%= current_admin.email %>
     <%= user_name.email %>
     <% end %></td>
 <td><%= link_to "確認/承認ページへ", {:action => 'expenses_check', :id => recognition.id} %></td>
-<br>
 </tr>
 <% end %>
 </table>
@@ -47,7 +43,6 @@ Hello! <%= current_admin.email %>
     <%= user_name.email %>
     <% end %></td>
 <td><%= link_to "差し戻し", {:action => 'expenses_check', :id => authorize.id} %></td>
-<br>
 </tr>
 <% end %>
 </table>
@@ -73,7 +68,6 @@ Hello! <%= current_admin.email %>
     <%= user_name.email %>
     <% end %></td>
 <td><%= link_to "再編集", {:action => 'expenses_check', :id => rejection.id} %></td>
-<br>
 </tr>
 <% end %>
 </table>

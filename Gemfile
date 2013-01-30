@@ -30,6 +30,7 @@ gem 'therubyracer', :platforms => :ruby
 end
 
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 gem 'less-rails'
 gem 'twitter-bootstrap-rails'
 

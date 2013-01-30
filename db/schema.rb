@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130115232636) do
+ActiveRecord::Schema.define(:version => 20130129061525) do
 
   create_table "accountings", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -59,8 +59,9 @@ ActiveRecord::Schema.define(:version => 20130115232636) do
     t.integer  "fare"
     t.integer  "recipt"
     t.integer  "month_id"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
+    t.boolean  "round_trip",       :default => false, :null => false
   end
 
   add_index "fares", ["month_id"], :name => "index_fares_on_month_id"

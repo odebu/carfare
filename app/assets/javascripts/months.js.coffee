@@ -26,6 +26,19 @@ jQuery ->
     window.open fare_url, 300, 200
     false
 
+# jquery uiでの日付入力
+  $("#fare_day").datepicker dateFormat: "dd"
+
+# 交通手段によっての領収書の有無切り替え
+  $("#fare_vehicle").change(->
+    str = $("#fare_vehicle").val()
+    if (str is "1") or (str is "3") or (str is "4")
+      $("#fare_recipt").val 1  
+    else
+      $("#fare_recipt").val 0
+  ).change()
+
+
 # google乗換案内からの要素取得テストとの残骸
 #  $("#fare_arrival_station").change(->
 #    start_str = $("#fare_start_station").val()

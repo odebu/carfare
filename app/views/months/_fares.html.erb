@@ -4,13 +4,12 @@
   <td><%= fares.visiting_purpose %></td>
   <td><%= fares.start_station %></td>
   <td><%= fares.arrival_station %></td>
-  <td id="fare" width="60"><%= number_to_currency(fares.fare,:precision =>0, :format=>"%n%u", :unit=>"円") %></td>
-  <td width="50"><% if fares.recipt == 1 %>
-	               有
-	       　　　 <% else %>
-                 無
+  <td width="50"><% if fares.round_trip == true %>
+                 往復
+         　　　 <% else %>
+                 片道
          　　　 <% end %>
-  </td>
+  </td>  
   <td><% if fares.vehicle == "0" %>
       電車・地下鉄
       <% elsif fares.vehicle == "1" %>
@@ -24,6 +23,13 @@
       <% elsif fares.vehicle == "5" %>
       その他
 　　 <% end %>
+  </td>
+  <td id="fare" width="60"><%= number_to_currency(fares.fare,:precision =>0, :format=>"%n%u", :unit=>"円") %></td>
+  <td width="50"><% if fares.recipt == 1 %>
+                 有
+         　　　 <% else %>
+                 無
+         　　　 <% end %>
   </td>
   <td width="30"><%= link_to '編集', edit_month_fare_path(@month.id, fares.id) %></td>
   <td width="30"><%= link_to '削除', month_fare_path(@month.id, fares.id), :confirm => 'Sure?',

@@ -4,13 +4,11 @@
   <td><%= fare_show.visiting_purpose %></td>
   <td><%= fare_show.start_station %></td>
   <td><%= fare_show.arrival_station %></td>
-  <td width="60"><%= number_to_currency(fare_show.fare, :precision =>0, :format=>"%n%u", :unit=>"円") %></td>
-  <td><% if fare_show.recipt == 1 %>
-        有
-      <% else %>
-        無
-      <% end %>
-  </td>
+  <td width="50"><% if fare_show.round_trip == true %>
+                 往復
+         　　　 <% else %>
+                 片道
+         　　　 <% end %>
   <td><% if fare_show.vehicle == "0" %>
         電車・地下鉄
       <% elsif fare_show.vehicle == "1" %>
@@ -23,6 +21,14 @@
         飛行機
       <% elsif fare_show.vehicle == "5" %>
         その他
+      <% end %>
+  </td>
+  </td> 
+  <td width="60"><%= number_to_currency(fare_show.fare, :precision =>0, :format=>"%n%u", :unit=>"円") %></td>
+  <td><% if fare_show.recipt == 1 %>
+        有
+      <% else %>
+        無
       <% end %>
   </td>
 </tr>

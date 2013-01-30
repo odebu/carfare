@@ -20,12 +20,9 @@ Hello! <%= current_accounting.email %><br>
     <% end %></td>
     <td><%= authorize.updated_at %></td>
     <td><%= link_to "交通費詳細へ", {:action => 'expenses_check', :id => authorize.user.id} %></td>
-<br>
 </tr>
 <% end %>
 </table>
 <% else %>
 承認済みの請求月はありません
 <% end %>
-
-<br>
