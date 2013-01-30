@@ -21,8 +21,8 @@ Hello! <%= current_user.email %>
 <% @rejection.each do |one| %>
 <tr id="month_<%= one.id %>">
   <td style="color:#ff0000"><%= one.year %>年<%= one.month %>月</td>
-  <td><%= link_to '交通費入力', [one] %></td>
-  <td><%= link_to '請求月編集', edit_month_path(one) %></td>
+  <td><%= link_to '交通費編集', [one] %></td>
+  <td><%= link_to '請求月変更', edit_month_path(one) %></td>
   <td><%= link_to '削除', [one], :confirm => 'Sure?',
                                 :method => :delete,
                                 :remote => true %>

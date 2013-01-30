@@ -26,6 +26,13 @@ jQuery ->
     window.open fare_url, 300, 200
     false
 
+# アクセスした年月を取得して請求月作成のデフォルトを設定する。
+  now = new Date()
+  thismonth = now.getMonth() + 1
+  thisyear = now.getFullYear()
+  $("#month_month").val thismonth
+  $("#month_year").val thisyear
+
 # jquery uiでの日付入力
   $("#fare_day").datepicker dateFormat: "dd"
 
@@ -37,7 +44,6 @@ jQuery ->
     else
       $("#fare_recipt").val 0
   ).change()
-
 
 # google乗換案内からの要素取得テストとの残骸
 #  $("#fare_arrival_station").change(->
